@@ -17,6 +17,7 @@ async function main() {
 
     let BORROW_AMOUNT = 1;
 
+// ---------------------------- Section 1 --------------------------------
     const [deployer] = await hre.ethers.getSigners();
     const provider = hre.ethers.provider;
 
@@ -74,7 +75,9 @@ async function main() {
 
     // 把钱包内的 vToken 转移到 Hunter 合约
     await vBAYC.connect(deployer).transfer(hunter.address, totalFee);
-    
+
+// ---------------------------- Section 3 --------------------------------
+
     // 创建 ApeCoin 合约实例
     const ape = new ethers.Contract(ape_addr, erc20_abi, provider);
     // 查询合约内 ApeCoin 余额
@@ -82,7 +85,9 @@ async function main() {
     
     // 查询合约内 vToken 数量
     console.log(`hunter vBayc balance ${await vBAYC.balanceOf(hunter.address)}`);
-    
+
+// ---------------------------- Section 4 --------------------------------
+
     // 发起闪电贷，领取空投
     let tx2 = await hunter.connect(deployer).initFlashLoan({
         nft: baycAddr,
